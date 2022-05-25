@@ -17,7 +17,7 @@ const Home = () => {
     return (
         <div>
             <HeaderComp/>
-            <div className="d-flex flex-column px-4 pb-4 pt-0 align-items-center">
+            <div className="d-flex flex-column px-4 pb-4 pt-0 align-items-center mt-3 mt-md-0">
                 <h1>SHORTIN</h1>
                 <p>adalah aplikasi website yang berfungsi untuk memperpendek link yang dapat di gunakan secara gratis. daftar sekarang dan kamu bisa memperpendek link yang kamu inginkan</p>
             </div>
