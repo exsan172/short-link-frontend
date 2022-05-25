@@ -204,7 +204,7 @@ const Dashboard = () => {
                                             </b>
                                         </div>
                                         <div className="col-12 col-md-6 text-right">
-                                            {moment(data.createdAt).format("D MMM YYYY HH:mm")}
+                                            {moment(data.createdAt).format("D MMM YYYY")}
                                         </div>
                                         <div className="col-12 col-md-6">
                                             {data.shortUrl}
