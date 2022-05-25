@@ -8,6 +8,7 @@ const HeaderDashboard = () => {
 
     const logout = () => {
         localStorage.removeItem("token")
+        localStorage.removeItem("userName")
         navigate("/")
     }
 
@@ -20,7 +21,7 @@ const HeaderDashboard = () => {
                     </div>
                     <div className="d-flex flex-fill justify-content-end align-items-center">
                         <div className="mx-2 text-white d-none d-md-flex">
-                            HI, Jancok
+                            HI, { localStorage.getItem("userName") }
                         </div>
                         <div className="d-flex mx-2 border px-4 py-1 rounded" style={{cursor:"pointer"}} onClick={() => logout()}>
                             <div className='text-white text-decoration-none'>Keluar &nbsp;<FontAwesomeIcon icon={faArrowRightLong}/></div>

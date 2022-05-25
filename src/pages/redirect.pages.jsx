@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { request } from "../config" 
 
 const Redirect = () => {
 
@@ -9,14 +9,10 @@ const Redirect = () => {
 
     useEffect(() => {
         const getRedirectUrl = async () => {
-            const getUrl = await axios({
-                url : "http://localhost:3012/redirect/get-redirect-url",
-                method : "POST",
-                data : {
-                    uniqueCode : uniqueId
-                }
+            const getUrl = await request.post("/redirect/get-redirect-url", null, {
+                uniqueCode : uniqueId
             })
-    
+            
             if(getUrl.data.statusCode === 200) {
                 window.location.href = getUrl.data.data.longUrl
                 

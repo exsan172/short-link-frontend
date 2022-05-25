@@ -1,6 +1,19 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import HeaderComp from "../components/header.comp"
 
 const Home = () => {
+    const navigate = useNavigate()
+    
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        const name  = localStorage.getItem("userName")
+
+        if(token !== null && name !== null) {
+            navigate("/dashboard")
+        }
+    }, [navigate])
+
     return (
         <div>
             <HeaderComp/>
