@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import { request } from '../config'
 import Loading from '../components/loading.comp'
 import BrandLogo from "../assets/shortin.png"
+import "./header.style.css"
 
 const HeaderComp = () => {
     const [generated, setGenerated] = useState(false)
@@ -71,15 +72,15 @@ const HeaderComp = () => {
                         <div className="d-flex mx-2">
                             <Link to="/login" className='text-white text-decoration-none'>Masuk</Link>
                         </div>
-                        <div className="d-flex mx-2 border px-4 py-1 rounded">
+                        <div className="d-flex mx-2 border px-4 py-1 rounded register">
                             <Link to="/register" className='text-white text-decoration-none'>Daftar</Link>
                         </div>
                     </div>
                 </div>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fillOpacity="1" d="M0,160L48,149.3C96,139,192,117,288,128C384,139,480,181,576,218.7C672,256,768,288,864,288C960,288,1056,256,1152,208C1248,160,1344,96,1392,64L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
-            <div className="d-flex justify-content-center align-items-center" style={{position:"relative"}}>
-                <div className="col-10 col-md-5" style={{position:"absolute", top:"-8vh"}}>
+            <div className="d-flex justify-content-center align-items-center my-5 my-md-0" style={{position:"relative"}}>
+                <div className="col-10 col-md-5 position-inputbar">
                     <div className="row">
                         <div className="col-8 col-md-9 col-lg-10 px-0">
                             <input type="text" className='border shadow rounded align-items-center px-3 w-100 bg-white' style={{height:"50px"}} placeholder="Masukan link ex: https://srtin.my.id" value={urlLong} onChange={(e) => setUrlLong(e.target.value)}/>

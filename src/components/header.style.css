@@ -1,0 +1,20 @@
+.position-inputbar {
+    position:absolute;
+    top:-8vh
+}
+
+.register {
+    display: flex !important;
+}
+
+@media (max-width: 250px) {
+    .register {
+        display: none !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .position-inputbar {
+        top:-4vh
+    }
+}

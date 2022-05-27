@@ -14,7 +14,10 @@ const Redirect = () => {
             })
             
             if(getUrl.data.statusCode === 200) {
-                window.location.href = getUrl.data.data.longUrl
+                const protocol = getUrl.data.data.longUrl.indexOf(".") === -1 ? "http://" : "https://"
+                const detectHaveProtocol = getUrl.data.data.longUrl.indexOf("://") === -1 ? protocol : ""
+
+                window.location.href = detectHaveProtocol+getUrl.data.data.longUrl
                 
             } else {
                 navigate("/not-found")
