@@ -41,7 +41,7 @@ const Home = () => {
             </div>
             <div className="d-flex flex-column p-4 align-items-center">
                 <p>
-                    Copyright &copy;&nbsp;{new Date().getFullYear()}&nbsp; <a href="http://exsan-renaldhi.herokuapp.com" className='text-decoration-none'>Exsan Renaldhi</a>
+                    Copyright &copy;&nbsp;{new Date().getFullYear()}&nbsp; <a href="https://exsan.my.id" className='text-decoration-none'>Exsan Renaldhi</a>
                 </p>
             </div>
         </div>

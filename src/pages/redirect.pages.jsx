@@ -14,7 +14,18 @@ const Redirect = () => {
             })
             
             if(getUrl.data.statusCode === 200) {
-                const protocol = getUrl.data.data.longUrl.indexOf(".") === -1 ? "http://" : "https://"
+                const checkIsIp = getUrl.data.data.longUrl.split(".")
+                let result = 0
+
+                for(const i in checkIsIp) {
+                    if(parseInt(checkIsIp[i])) {
+                        result--
+                    } else {
+                        result++
+                    }
+                }
+
+                const protocol = result < 0 ? "http://" : "https://"
                 const detectHaveProtocol = getUrl.data.data.longUrl.indexOf("://") === -1 ? protocol : ""
 
                 window.location.href = detectHaveProtocol+getUrl.data.data.longUrl
@@ -41,7 +52,7 @@ const Redirect = () => {
                     </span>
                 </div>
                 <div className="d-flex" style={{fontSize:"small"}}>
-                    Copyright &copy; &nbsp;<a href="http://exsan-renaldhi.herokuapp.com">Exsan Renaldhi</a>
+                    Copyright &copy; &nbsp;<a href="https://exsan.my.id">Exsan Renaldhi</a>
                 </div>
             </div>
         </div>
