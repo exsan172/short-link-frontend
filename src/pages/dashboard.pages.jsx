@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faCopy, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment-timezone'
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 import HeaderDashboard from "../components/headerDashboard.comp"
 import { request } from '../config'
 import Loading from '../components/loading.comp'
@@ -18,6 +19,19 @@ const Dashboard = () => {
     const [modalsDelete, setModalsDelete] = useState(false)
     const [modalsCreate, setModalsCreate] = useState(false)
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        const name = localStorage.getItem("userName")
+
+        if(token === null || token === "" || name === null || name === ""){
+            localStorage.removeItem("token")
+            localStorage.removeItem("userName")
+            navigate("/login")
+        }
+
+    }, [navigate])
 
     const getLink = async () => {
         const link = await request.get("/service/generate-url", {
@@ -126,34 +140,43 @@ const Dashboard = () => {
 
     const createLink = async () => {
         if(nameLink !== "" && urlLong !== "") {
-            setLoading(true)
-            const create = await request.post("/service/generate-url", {
-                token : localStorage.getItem("token")
-            }, {
-                name : nameLink,
-                longUrl : urlLong
-            })
-
-            setLoading(false)
-            setModalsCreate(false)
-            if(create.data.statusCode === 201) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses!',
-                    text: 'Data berhasil simpan!',
-                    showConfirmButton: false,
-                    timer: 1000,
+            if(urlLong.indexOf("srtin.my.id") === -1){
+                setLoading(true)
+                const create = await request.post("/service/generate-url", {
+                    token : localStorage.getItem("token")
+                }, {
+                    name : nameLink,
+                    longUrl : urlLong
                 })
-                getLink()
+
+                setLoading(false)
+                setModalsCreate(false)
+                if(create.data.statusCode === 201) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses!',
+                        text: 'Data berhasil simpan!',
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                    getLink()
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'data gagal di simpan!',
+                    })
+                }
+                setNameLink("")
+                setUrlLong("")
+
             } else {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal!',
-                    text: 'data gagal di simpan!',
+                    icon: 'warning',
+                    title: 'Peringatan',
+                    text: 'Jangan memasukan url yang sudah di pendekan atau link website ini !',
                 })
             }
-            setNameLink("")
-            setUrlLong("")
         } else {
             Swal.fire({
                 icon: 'warning',

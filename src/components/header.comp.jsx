@@ -15,28 +15,37 @@ const HeaderComp = () => {
 
     const createLink = async () => {
         if(urlLong !== "") {
-            setLoading(true)
-            const create = await request.post("/redirect/anonymous-generate-url", null, {
-                longUrl : urlLong
-            })
 
-            setLoading(false)
-            if(create.data.statusCode === 201) {
-                setShortLink(create.data.data.shortUrl)
-                setUrlLong(create.data.data.shortUrl)
-                setGenerated(true)
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sukses!',
-                    text: 'Link berhasil generate!',
-                    showConfirmButton: false,
-                    timer: 1500,
+            if(urlLong.indexOf("srtin.my.id") === -1){
+                setLoading(true)
+                const create = await request.post("/redirect/anonymous-generate-url", null, {
+                    longUrl : urlLong
                 })
+    
+                setLoading(false)
+                if(create.data.statusCode === 201) {
+                    setShortLink(create.data.data.shortUrl)
+                    setUrlLong(create.data.data.shortUrl)
+                    setGenerated(true)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sukses!',
+                        text: 'Link berhasil generate!',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Link gagal generate!',
+                    })
+                }
             } else {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal!',
-                    text: 'Link gagal generate!',
+                    icon: 'warning',
+                    title: 'Peringatan',
+                    text: 'Jangan memasukan url yang sudah di pendekan atau link website ini !',
                 })
             }
         } else {
