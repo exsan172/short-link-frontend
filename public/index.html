@@ -78,18 +78,33 @@
 
 			window.addEventListener("beforeinstallprompt", function (event) {
 				event.preventDefault();
-				window.promptEvent = event;
-			});
+				
+				const installAppsElements = document.getElementById("installAppsElements")
+				const showInstall = localStorage.getItem("closeInstall")
+				const install = document.getElementById("installApps")
 
-			document.addEventListener("DOMContentLoaded", function(event) {
-				setTimeout(() => {
-					const install = document.getElementById("installApps")
+				if(installAppsElements !== null) {
+					if(showInstall !== null) {
+						if(showInstall === "false") {
+							installAppsElements.setAttribute("style", "display:flex")
+						}
+						
+						if(showInstall === "true") {
+							installAppsElements.setAttribute("style", "display:none")
+						}
+					} else {
+						installAppsElements.setAttribute("style", "display:flex")
+						localStorage.setItem("closeInstall", false)
+					}
+
+					window.promptEvent = event;
 					if(install !== null) {
 						if(getMobileOperatingSystem !== "iOS") {
 							install.addEventListener('click', () => {
 								window.promptEvent.prompt();
 								window.promptEvent.userChoice.then(function (choiceResult) {
 									if (choiceResult.outcome === "accepted") {
+										installAppsElements.setAttribute("style", "display:none")
 										localStorage.setItem("closeInstall", true)
 									}
 									
@@ -98,7 +113,15 @@
 							})
 						}
 					}
-				}, 5000)
+
+					const closeInstallApps = document.getElementById("closeInstallApps")
+					if(closeInstallApps !== null) {
+						closeInstallApps.addEventListener("click", () => {
+							installAppsElements.setAttribute("style", "display:none")
+							localStorage.setItem("closeInstall", true)
+						})
+					}
+				}
 			});
 		</script>
 	</body>

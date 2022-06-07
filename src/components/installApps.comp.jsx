@@ -1,49 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faPlusSquare, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { Modal } from 'react-bootstrap'
 import Icon from '../assets/icon-shortin.png'
 
 const InstallApps = () => {
-    const [showTab, setShowTab] = useState(false)
     const [showIos, setshowIos] = useState(false)
-    const [countInstall, setCountInstall] = useState(5)
-
-    useEffect(() => {
-        const checkClose = localStorage.getItem("closeInstall")
-        if(checkClose !== null) {
-            if(checkClose === "false") {
-                setShowTab(true)
-            }
-
-            if(checkClose === "true") {
-                setShowTab(false)
-            }
-        } else {
-            setShowTab(false)
-            localStorage.setItem("closeInstall", false)
-        }
-
-        let interval = setInterval(() => {
-            if(countInstall > 0){
-                setCountInstall(countInstall-1)
-            }
-        }, 1000)
-        
-        return () => clearInterval(interval);
-    }, [countInstall])
-
-    const closeInstallPromt = () => {
-        setShowTab(false)
-        localStorage.setItem("closeInstall", true)
-    }
 
     const installApps = () => {
         const checkOs = getMobileOperatingSystem()
         if(checkOs === "iOS") {
             setshowIos(true)
         }
-
     }
 
     const getMobileOperatingSystem = () => {
@@ -65,11 +33,11 @@ const InstallApps = () => {
     }
 
     return (
-        <div className={`${showTab === false ? "d-none" : "d-flex"} sticky-bottom justify-content-center`}>
+        <div className={`sticky-bottom justify-content-center`} style={{display:"none"}} id="installAppsElements">
             <div className="col-11 col-md-5 col-lg-4 mb-2">
                 <div className="d-flex bg-white border rounded m-1">
                     <div className="d-flex align-items-center justify-content-center px-3">
-                        <FontAwesomeIcon icon={faTimes} onClick={() => closeInstallPromt()}/>
+                        <FontAwesomeIcon icon={faTimes} id="closeInstallApps"/>
                     </div>
                     <div className="d-flex align-items-center justify-content-center p-2">
                         <img src={Icon} alt="icon shortin" style={{width:"35px"}} className="rounded"/>
@@ -85,11 +53,7 @@ const InstallApps = () => {
                     <div className="d-flex align-items-center justify-content-center p-2">
                         <button className="px-3 py-2 border-0 text-white rounded" id="installApps" style={{backgroundColor:"#0099ff"}} onClick={() => installApps()}>
                             <span style={{fontSize:"small"}}>
-                                Install 
-                                {
-                                    countInstall > 0 &&
-                                    <span>&nbsp;( {countInstall} )</span>
-                                }
+                                Install
                             </span>
                         </button>
                     </div>
