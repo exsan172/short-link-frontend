@@ -1,7 +1,11 @@
 var CACHE_NAME = 'pwa-task-manager';
 var urlsToCache = [
 	'/',
-	'/completed'
+	'/login',
+	'/register',
+	'/dashboard',
+	'/no-internet',
+	'/forgot-password'
 ];
 
 // Install a service worker
@@ -26,8 +30,9 @@ self.addEventListener('fetch', event => {
 			return response;
 			}
 			return fetch(event.request);
-		}
-		)
+		}).catch(err => {
+			return caches.match("/no-internet");
+		})
 	);
 });
 

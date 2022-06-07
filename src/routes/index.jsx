@@ -8,6 +8,7 @@ import ChangePassword from "../pages/change-password.pages";
 import ForgotPassword from "../pages/forgot-password.pages";
 import NotFound from "../pages/404.pages"
 import Dashboard from "../pages/dashboard.pages";
+import NoInternet from "../pages/no-internet";
 
 const RoutesApps = () => {
     return (
@@ -20,6 +21,7 @@ const RoutesApps = () => {
                 <Route path="/change-password" element={<ChangePassword/>}/>
                 <Route path="/confirm-password/:token" element={<ConfirmPassword/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
+                <Route path="/no-internet" element={<NoInternet/>}/>
                 <Route path="/not-found" element={<NotFound/>}/>
                 <Route path="/dashboard" element={
                     <PrivateRoute>
