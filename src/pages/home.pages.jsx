@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import HeaderComp from "../components/header.comp"
+import InstallApps from '../components/installApps.comp'
 
 const Home = () => {
     const navigate = useNavigate()
@@ -44,6 +45,7 @@ const Home = () => {
                     Copyright &copy;&nbsp;{new Date().getFullYear()}&nbsp; <a href="https://exsan.my.id" className='text-decoration-none'>Exsan Renaldhi</a>
                 </p>
             </div>
+            <InstallApps/>
         </div>
     )
 }

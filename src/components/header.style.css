@@ -7,9 +7,17 @@
     display: flex !important;
 }
 
+.image-brand {
+    max-width: 100px;
+}
+
 @media (max-width: 250px) {
     .register {
         display: none !important;
+    }
+
+    .image-brand {
+        max-width: 100%;
     }
 }
 
@@ -17,5 +25,9 @@
     .position-inputbar {
         top:0;
         position:relative
+    }
+    
+    .image-brand {
+        max-width: 100px;
     }
 }

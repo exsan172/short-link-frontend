@@ -75,7 +75,7 @@ const HeaderComp = () => {
             <div className="d-flex p-3" style={{background:"#0099ff"}}>
                 <div className="d-flex container align-items-center">
                     <div className="d-flex">
-                        <img src={BrandLogo} alt="shortin" width="100px" height="20px"/>
+                        <img src={BrandLogo} alt="shortin" className='image-brand'/>
                     </div>
                     <div className="d-flex flex-fill justify-content-end align-items-center">
                         <div className="d-flex mx-2">
