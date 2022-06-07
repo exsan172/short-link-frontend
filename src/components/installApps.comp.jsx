@@ -7,6 +7,7 @@ import Icon from '../assets/icon-shortin.png'
 const InstallApps = () => {
     const [showTab, setShowTab] = useState(false)
     const [showIos, setshowIos] = useState(false)
+    const [countInstall, setCountInstall] = useState(3)
 
     useEffect(() => {
         const checkClose = localStorage.getItem("closeInstall")
@@ -23,12 +24,14 @@ const InstallApps = () => {
             localStorage.setItem("closeInstall", false)
         }
 
-        window.addEventListener("beforeinstallprompt", function (event) {
-            event.preventDefault();
-            window.promptEvent = event;
-        });
-
-    }, [])
+        let interval = setInterval(() => {
+            if(countInstall > 0){
+                setCountInstall(countInstall-1)
+            }
+        }, 1000)
+        
+        return () => clearInterval(interval);
+    }, [countInstall])
 
     const closeInstallPromt = () => {
         setShowTab(false)
@@ -39,17 +42,6 @@ const InstallApps = () => {
         const checkOs = getMobileOperatingSystem()
         if(checkOs === "iOS") {
             setshowIos(true)
-
-        } else {
-            window.promptEvent.prompt();
-            window.promptEvent.userChoice.then(function (choiceResult) {
-                if (choiceResult.outcome === "accepted") {
-                    setShowTab(false)
-                    localStorage.setItem("closeInstall", true)
-                }
-                
-                window.promptEvent = null;
-            });
         }
 
     }
@@ -91,9 +83,13 @@ const InstallApps = () => {
                         </div>
                     </div>
                     <div className="d-flex align-items-center justify-content-center p-2">
-                        <button className="px-3 py-2 border-0 text-white rounded" style={{backgroundColor:"#0099ff"}} onClick={() => installApps()}>
+                        <button className="px-3 py-2 border-0 text-white rounded" id="installApps" style={{backgroundColor:"#0099ff"}} onClick={() => installApps()}>
                             <span style={{fontSize:"small"}}>
-                                Install
+                                Install 
+                                {
+                                    countInstall > 0 &&
+                                    <span>&nbsp;( {countInstall} )</span>
+                                }
                             </span>
                         </button>
                     </div>
