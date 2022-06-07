@@ -7,7 +7,7 @@ import Icon from '../assets/icon-shortin.png'
 const InstallApps = () => {
     const [showTab, setShowTab] = useState(false)
     const [showIos, setshowIos] = useState(false)
-    const [countInstall, setCountInstall] = useState(3)
+    const [countInstall, setCountInstall] = useState(5)
 
     useEffect(() => {
         const checkClose = localStorage.getItem("closeInstall")

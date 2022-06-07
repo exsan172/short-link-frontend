@@ -90,7 +90,6 @@
 								window.promptEvent.prompt();
 								window.promptEvent.userChoice.then(function (choiceResult) {
 									if (choiceResult.outcome === "accepted") {
-										setShowTab(false)
 										localStorage.setItem("closeInstall", true)
 									}
 									
@@ -99,7 +98,7 @@
 							})
 						}
 					}
-				}, 3000)
+				}, 5000)
 			});
 		</script>
 	</body>
